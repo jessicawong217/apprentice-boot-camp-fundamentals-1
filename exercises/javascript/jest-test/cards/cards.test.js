@@ -1,61 +1,43 @@
-const { Cards } = require('../../cards/cards.js');
+const { Card, Cards, Deck } = require("../../cards/cards.js");
 
-describe('getCards', function () {
-  test('get deck in order, return 52 cards correctly formatted', function () {
-    let cards = new Cards();
-    expect(cards.getCards()).toStrictEqual([
-      "ace of clubs",
-      "2 of clubs",
-      "3 of clubs",
-      "4 of clubs",
-      "5 of clubs",
-      "6 of clubs",
-      "7 of clubs",
-      "8 of clubs",
-      "9 of clubs",
-      "10 of clubs",
-      "jack of clubs",
-      "queen of clubs",
-      "king of clubs",
-      "ace of diamonds",
-      "2 of diamonds",
-      "3 of diamonds",
-      "4 of diamonds",
-      "5 of diamonds",
-      "6 of diamonds",
-      "7 of diamonds",
-      "8 of diamonds",
-      "9 of diamonds",
-      "10 of diamonds",
-      "jack of diamonds",
-      "queen of diamonds",
-      "king of diamonds",
-      "ace of hearts",
-      "2 of hearts",
-      "3 of hearts",
-      "4 of hearts",
-      "5 of hearts",
-      "6 of hearts",
-      "7 of hearts",
-      "8 of hearts",
-      "9 of hearts",
-      "10 of hearts",
-      "jack of hearts",
-      "queen of hearts",
-      "king of hearts",
-      "ace of spades",
-      "2 of spades",
-      "3 of spades",
-      "4 of spades",
-      "5 of spades",
-      "6 of spades",
-      "7 of spades",
-      "8 of spades",
-      "9 of spades",
-      "10 of spades",
-      "jack of spades",
-      "queen of spades",
-      "king of spades"
-    ]);
+describe("Card", function () {
+  test("it should assign face value and suit when given index values", function () {
+    const mockSuitIndex = 0;
+    const mockValueIndex = 0;
+
+    const expectedSuit = "clubs";
+    const expectedValue = "ace";
+
+    const card = new Card(mockSuitIndex, mockValueIndex);
+    card.assign();
+
+    expect(card.suit).toBe(expectedSuit);
+    expect(card.value).toBe(expectedValue);
+  });
+});
+
+describe("Cards", function () {
+  test("getCards should return 52 cards (with index of 1)", function () {
+    const totalCardsInDeck = 52;
+    const cards = new Cards();
+    const allCards = cards.getCards();
+
+    expect(allCards.length).toBe(totalCardsInDeck);
+  });
+});
+
+describe("Deck", function () {
+  test("getDeck should return formatted deck in string", function () {
+    const mockCards = [
+      { value: "ace", suit: "clubs" },
+      { value: "ace", suit: "diamonds" },
+    ];
+
+    const expectedDeck = ["ace of clubs", "ace of diamonds"];
+
+    let deck = new Deck(mockCards);
+    deck = deck.getDeck();
+
+    expect(deck).toEqual(expectedDeck);
   });
 });
